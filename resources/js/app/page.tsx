@@ -71,8 +71,18 @@ export default function Home() {
                  <h2 className="text-4xl font-bold leading-tight">Professional Pharmacy <br />in your pocket.</h2>
                  <p className="text-blue-100/80">Download our app for exclusive discounts and live order tracking.</p>
                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
-                    <button className="bg-white text-blue-700 font-bold px-8 py-4 rounded-2xl hover:bg-blue-50 transition-all shadow-xl">App Store</button>
-                    <button className="bg-blue-500/30 text-white font-bold border border-white/20 px-8 py-4 rounded-2xl hover:bg-white/10 transition-all">Play Store</button>
+                    <button 
+                      onClick={() => alert('iOS App is coming soon! Stay tuned for wellness at your fingertips.')}
+                      className="bg-white text-blue-700 font-bold px-8 py-4 rounded-2xl hover:bg-blue-50 transition-all shadow-xl"
+                    >
+                      App Store
+                    </button>
+                    <button 
+                      onClick={() => alert('The Android App is coming soon to Play Store! Stay tuned for wellness at your fingertips.')}
+                      className="bg-blue-500/30 text-white font-bold border border-white/20 px-8 py-4 rounded-2xl hover:bg-white/10 transition-all"
+                    >
+                      Play Store
+                    </button>
                  </div>
               </div>
               <div className="hidden md:flex justify-end">

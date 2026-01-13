@@ -131,7 +131,10 @@ export default function Products({ productsByCategory, filters }: ProductsProps)
                                         <h3 className="font-bold text-sm text-gray-900 truncate">{product.name}</h3>
                                         <p className="text-emerald-600 font-bold text-sm">₦{product.price.toLocaleString()}</p>
                                     </div>
-                                    <button className="mt-4 w-full bg-emerald-50 text-emerald-700 font-bold py-2 rounded-xl text-xs hover:bg-emerald-600 hover:text-white transition-all">
+                                    <button 
+                                        onClick={() => alert('Shopping functionality is being finalized. You will be able to add products to your cart very soon!')}
+                                        className="mt-4 w-full bg-emerald-50 text-emerald-700 font-bold py-2 rounded-xl text-xs hover:bg-emerald-600 hover:text-white transition-all"
+                                    >
                                         Add to Cart
                                     </button>
                                 </div>

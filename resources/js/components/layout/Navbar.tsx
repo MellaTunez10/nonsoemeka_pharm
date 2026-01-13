@@ -63,7 +63,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-2 md:space-x-6">
             <div className="hidden lg:flex flex-col text-right">
               <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Need help?</span>
-              <span className="text-sm font-semibold text-emerald-700">+234 800 NONSO PHARM</span>
+              <span className="text-sm font-semibold text-emerald-700">+234 704 547 5153</span>
             </div>
             
             <Link href={auth?.user ? "/settings/profile" : "/login"} className="p-2 text-gray-600 hover:text-emerald-600 transition-colors">

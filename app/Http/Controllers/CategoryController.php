@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -21,9 +22,12 @@ class CategoryController extends Controller
 
         $component = $mapping[$slug] ?? 'page';
 
+        $products = Product::where('category', $slug)->paginate(12);
+
         return Inertia::render($component, [
             'slug' => $slug,
             'title' => str_replace('-', ' ', ucwords($slug, '-')),
+            'products' => $products,
         ]);
     }
 }
