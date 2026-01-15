@@ -12,7 +12,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-emerald-900 section-padding">
+    <section className="relative overflow-hidden bg-emerald-900 pb-16 md:pb-24 pt-8 md:pt-12">
       {/* Background patterns */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-emerald-800/30 skew-x-12 translate-x-12 md:translate-x-24" />
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl" />
@@ -34,7 +34,7 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link href="/prescriptions" className="btn-primary flex items-center justify-center space-x-2">
+            <Link href="/prescription-upload" className="btn-primary flex items-center justify-center space-x-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>

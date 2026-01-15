@@ -10,20 +10,30 @@ interface SimplePageProps {
 
 export default function SimplePage({ title, content }: SimplePageProps) {
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-white dark:bg-gray-950 transition-colors">
             <Head title={title} />
             <Navbar />
             
             <section className="container-custom py-24 md:py-32">
-                <div className="max-w-3xl space-y-8">
-                    <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">{title}</h1>
-                    <div className="h-1.5 w-20 bg-emerald-500 rounded-full" />
-                    <p className="text-xl text-gray-500 leading-relaxed">
-                        {content}
-                    </p>
-                    <div className="pt-10 border-t border-gray-100 mt-12">
-                        <p className="text-sm text-gray-400">
-                            Our team is currently working hard to bring you detailed information on this topic. Please check back soon or contact support for immediate assistance.
+                <div className="max-w-4xl space-y-12">
+                    <div className="space-y-4">
+                        <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight">{title}</h1>
+                        <div className="h-1.5 w-24 bg-emerald-500 rounded-full" />
+                    </div>
+                    
+                    <div 
+                        className="prose prose-lg prose-emerald dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed space-y-6"
+                        dangerouslySetInnerHTML={{ __html: content }}
+                    />
+
+                    <div className="pt-12 border-t border-gray-100 dark:border-gray-800 flex items-center gap-4">
+                        <div className="bg-emerald-50 dark:bg-emerald-900/20 p-3 rounded-2xl text-emerald-600 dark:text-emerald-400">
+                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                             </svg>
+                        </div>
+                        <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+                            Last Updated: January 2026 • Professional Pharmacy Care
                         </p>
                     </div>
                 </div>

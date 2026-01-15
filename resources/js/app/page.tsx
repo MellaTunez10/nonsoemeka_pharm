@@ -5,16 +5,16 @@ import Hero from '@/components/home/Hero';
 import FeaturedProducts from '@/components/home/FeaturedProducts';
 import Footer from '@/components/layout/Footer';
 
-export default function Home() {
+export default function Home({ featuredProducts }: { featuredProducts: any[] }) {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-white dark:bg-gray-950 transition-colors duration-300">
       <Navbar />
       
       {/* Dynamic Hero Section */}
       <Hero />
 
       {/* Trust & Features Banner */}
-      <div className="bg-white py-12 border-b border-gray-100">
+      <div className="bg-white dark:bg-gray-900 py-12 border-b border-gray-100 dark:border-gray-800 transition-colors">
         <div className="container-custom grid grid-cols-2 lg:grid-cols-4 gap-8">
           {[
             { icon: '🛡️', title: 'NAFDAC Certified', desc: '100% genuine products' },
@@ -25,8 +25,8 @@ export default function Home() {
             <div key={idx} className="flex items-center space-x-4">
               <span className="text-3xl grayscale hover:grayscale-0 transition-all cursor-default">{item.icon}</span>
               <div>
-                <h4 className="font-bold text-gray-900 text-sm">{item.title}</h4>
-                <p className="text-gray-500 text-xs">{item.desc}</p>
+                <h4 className="font-bold text-gray-900 dark:text-white text-sm">{item.title}</h4>
+                <p className="text-gray-500 dark:text-gray-400 text-xs">{item.desc}</p>
               </div>
             </div>
           ))}
@@ -37,17 +37,17 @@ export default function Home() {
       <section className="py-16 container-custom">
         <div className="flex items-center space-x-4 mb-10">
            <div className="h-1 w-12 bg-emerald-600 rounded-full" />
-           <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Shop by Concerns</h2>
+           <h2 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">Shop by Concerns</h2>
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {[
-            { name: 'Pain Relief', emoji: '💊', slug: 'daily-needs', color: 'bg-emerald-50 text-emerald-700 border-emerald-100 hover:bg-emerald-100' },
-            { name: 'Skin Care', emoji: '✨', slug: 'skincare', color: 'bg-indigo-50 text-indigo-700 border-indigo-100 hover:bg-indigo-100' },
-            { name: 'Multivitamins', emoji: '🍎', slug: 'vitamins-supplements', color: 'bg-amber-50 text-amber-700 border-amber-100 hover:bg-amber-100' },
-            { name: 'Baby Care', emoji: '👶', slug: 'baby-mother', color: 'bg-pink-50 text-pink-700 border-pink-100 hover:bg-pink-100' },
-            { name: 'Sexual Health', emoji: '❤️', slug: 'sexual-health', color: 'bg-rose-50 text-rose-700 border-rose-100 hover:bg-rose-100' },
-            { name: 'First Aid', emoji: '🩹', slug: 'daily-needs', color: 'bg-blue-50 text-blue-700 border-blue-100 hover:bg-blue-100' },
+            { name: 'Pain Relief', emoji: '💊', slug: 'pain-relief', color: 'bg-emerald-50 text-emerald-700 border-emerald-100 hover:bg-emerald-100 dark:bg-emerald-900/10 dark:text-emerald-400 dark:border-emerald-900/50 dark:hover:bg-emerald-900/20' },
+            { name: 'Skin Care', emoji: '✨', slug: 'skincare', color: 'bg-indigo-50 text-indigo-700 border-indigo-100 hover:bg-indigo-100 dark:bg-indigo-900/10 dark:text-indigo-400 dark:border-indigo-900/50 dark:hover:bg-indigo-900/20' },
+            { name: 'Multivitamins', emoji: '🍎', slug: 'vitamins-supplements', color: 'bg-amber-50 text-amber-700 border-amber-100 hover:bg-amber-100 dark:bg-amber-900/10 dark:text-amber-400 dark:border-amber-900/50 dark:hover:bg-amber-900/20' },
+            { name: 'Baby Care', emoji: '👶', slug: 'baby-mother', color: 'bg-pink-50 text-pink-700 border-pink-100 hover:bg-pink-100 dark:bg-pink-900/10 dark:text-pink-400 dark:border-pink-900/50 dark:hover:bg-pink-900/20' },
+            { name: 'Sexual Health', emoji: '❤️', slug: 'sexual-health', color: 'bg-rose-50 text-rose-700 border-rose-100 hover:bg-rose-100 dark:bg-rose-900/10 dark:text-rose-400 dark:border-rose-900/50 dark:hover:bg-rose-900/20' },
+            { name: 'First Aid', emoji: '🩹', slug: 'first-aid', color: 'bg-blue-50 text-blue-700 border-blue-100 hover:bg-blue-100 dark:bg-blue-900/10 dark:text-blue-400 dark:border-blue-900/50 dark:hover:bg-blue-900/20' },
           ].map((cat) => (
             <Link 
               key={cat.name} 
@@ -55,17 +55,17 @@ export default function Home() {
               className={`flex flex-col items-center justify-center p-8 rounded-2xl border transition-all group ${cat.color}`}
             >
                <span className="text-4xl mb-4 group-hover:scale-110 transition-transform">{cat.emoji}</span>
-               <span className="text-[10px] font-bold uppercase tracking-widest">{cat.name}</span>
+               <span className="text-xs font-bold uppercase tracking-widest">{cat.name}</span>
             </Link>
           ))}
         </div>
       </section>
       
-      <FeaturedProducts />
+      <FeaturedProducts products={featuredProducts} />
 
       {/* Promotional Banner */}
       <section className="container-custom py-16">
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-[2.5rem] p-12 relative overflow-hidden shadow-2xl shadow-blue-200">
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-blue-900 dark:to-indigo-950 rounded-[2.5rem] p-12 relative overflow-hidden shadow-2xl shadow-blue-200 dark:shadow-none">
            <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
               <div className="space-y-6 text-white text-center md:text-left">
                  <h2 className="text-4xl font-bold leading-tight">Professional Pharmacy <br />in your pocket.</h2>

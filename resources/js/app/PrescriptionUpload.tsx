@@ -5,6 +5,7 @@ import { Head, Link } from '@inertiajs/react';
 
 export default function PrescriptionUpload() {
     const [dragActive, setDragActive] = useState(false);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
     const handleDrag = (e: React.DragEvent) => {
         e.preventDefault();
@@ -12,9 +13,26 @@ export default function PrescriptionUpload() {
         if (e.type === "dragenter" || e.type === "dragover") {
             setDragActive(true);
         } else if (e.type === "dragleave") {
-            setDragActive(false);
+            setDragActive(false); 
         }
     };
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDragActive(false);
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            setSelectedFile(e.dataTransfer.files[0]);
+        }
+    };
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setSelectedFile(e.target.files[0]);
+        }
+    };
+
+    const removeFile = () => setSelectedFile(null);
 
     return (
         <main className="min-h-screen bg-gray-50/50">
@@ -68,20 +86,50 @@ export default function PrescriptionUpload() {
 
                             <form 
                                 onDragEnter={handleDrag}
+                                onDragLeave={handleDrag}
+                                onDragOver={handleDrag}
+                                onDrop={handleDrop}
                                 className={`relative group border-2 border-dashed rounded-3xl p-12 transition-all flex flex-col items-center justify-center gap-6 ${dragActive ? 'border-emerald-500 bg-emerald-50/50' : 'border-gray-200 hover:border-emerald-300'}`}
                             >
-                                <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                    </svg>
-                                </div>
-                                
-                                <div className="text-center">
-                                    <p className="text-gray-900 font-bold">Click to upload or drag & drop</p>
-                                    <p className="text-gray-400 text-xs mt-1">Place your prescription clearly on a flat surface</p>
-                                </div>
+                                {selectedFile ? (
+                                    <div className="flex flex-col items-center gap-4 animate-in zoom-in duration-300">
+                                        <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center">
+                                            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                            </svg>
+                                        </div>
+                                        <div className="text-center">
+                                            <p className="text-gray-900 font-bold">{selectedFile.name}</p>
+                                            <p className="text-gray-400 text-xs mt-1">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                                        </div>
+                                        <button 
+                                            type="button"
+                                            onClick={removeFile}
+                                            className="text-rose-500 text-xs font-bold uppercase tracking-widest hover:text-rose-600 transition-colors"
+                                        >
+                                            Remove File
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                                            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                            </svg>
+                                        </div>
+                                        
+                                        <div className="text-center">
+                                            <p className="text-gray-900 font-bold">Click to upload or drag & drop</p>
+                                            <p className="text-gray-400 text-xs mt-1">Place your prescription clearly on a flat surface</p>
+                                        </div>
+                                    </>
+                                )}
 
-                                <input type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                                <input 
+                                    type="file" 
+                                    onChange={handleFileChange}
+                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+                                />
                             </form>
 
                             <div className="space-y-4">

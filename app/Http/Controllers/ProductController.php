@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -20,13 +20,22 @@ class ProductController extends Controller
                 ->when($request->input('search'), function ($query, $search) {
                     $query->where('name', 'like', "%{$search}%");
                 })
-                ->paginate(6, ['*'], $category . '_page')
+                ->paginate(6, ['*'], $category.'_page')
                 ->withQueryString();
         }
 
         return Inertia::render('Products', [
             'productsByCategory' => $productsByCategory,
             'filters' => $request->only(['search']),
+        ]);
+    }
+
+    public function show(string $slug): Response
+    {
+        $product = Product::where('slug', $slug)->firstOrFail();
+
+        return Inertia::render('ProductShow', [
+            'product' => $product,
         ]);
     }
 }
